@@ -22,7 +22,7 @@ namespace QueryFirst
         bool QueryHasRun { get; set; }
         string ResultClassName { get; }
         List<ResultFieldDetails> ResultFields { get; set; }
-        QFConfigModel Config { get; }
+        IQFConfigModel Config { get; }
         void InitForQuery(Document queryDoc);
         string ExecuteScalarReturnType { get; }
     }

@@ -86,6 +86,7 @@
     <Compile Include="BackwardCompatibility.cs" />
     <Compile Include="DesignTimeConnectionString.cs" />
     <Compile Include="ICodeGenerationContext.cs" />
+    <Compile Include="IConcuctor.cs" />
     <Compile Include="IConfigFileReader.cs" />
     <Compile Include="IConfigResolver.cs" />
     <Compile Include="QFConfig.cs" />

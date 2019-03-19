@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using EnvDTE;
 using EnvDTE80;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using Newtonsoft.Json;
 using TinyIoC;
 
 namespace QueryFirst
@@ -64,15 +66,36 @@ https://marketplace.visualstudio.com/items?itemName=bbsimonbb.QueryFirst#review-
                     _VSOutputWindow.Write("Already registered\n");
                     return;
                 }
-                System.Configuration.KeyValueConfigurationElement helperAssembly = null;
-
                 List<Assembly> assemblies = new List<Assembly>();
-                if (helperAssembly != null && !string.IsNullOrEmpty(helperAssembly.Value))
+
+                foreach (Project solutionProject in _dte.Solution.Projects)
                 {
-                    assemblies.Add(Assembly.LoadFrom(helperAssembly.Value));
+                        
                 }
+                
+                var cFile = _dte.Solution.Projects.Cast<Project>()
+                    .SelectMany(p => new FileInfo(p.FullName).Directory?.GetFiles("qfconfig.json")).FirstOrDefault();
+                if (cFile != null)
+                {
+                    //manual read config
+                    var config = JsonConvert.DeserializeObject<QFConfigModel>(File.ReadAllText(cFile.FullName));
+                    var helperAssembly = config.HelperAssembly;
+
+                 
+                    if (helperAssembly != null && !string.IsNullOrEmpty(helperAssembly))
+                    {
+                        assemblies.Add(Assembly.LoadFrom(helperAssembly));
+                    }
+                }
+
                 assemblies.Add(Assembly.GetExecutingAssembly());
-                TinyIoCContainer.Current.AutoRegister(assemblies, DuplicateImplementationActions.RegisterSingle);
+                TinyIoCContainer.Current.AutoRegister(assemblies, DuplicateImplementationActions.RegisterSingle, type =>
+                    {
+                        return type != typeof(Conductor);
+                    });
+                var cndType = assemblies.SelectMany(a => a.SafeGetTypes())
+                    .FirstOrDefault(t => typeof(IConductor).IsAssignableFrom(t));
+                TinyIoCContainer.Current.Register(typeof(IConductor), cndType).AsMultiInstance();
                 // IProvider, for instance, has multiple implementations. To resolve we use the provider name on the connection string, 
                 // which must correspond to the fully qualified name of the implementation. ie. QueryFirst.Providers.SqlClient for SqlServer
 
@@ -120,7 +143,9 @@ https://marketplace.visualstudio.com/items?itemName=bbsimonbb.QueryFirst#review-
                         {
                             // regenerate query in new location to get new path to manifest stream.
                             var ctx = TinyIoC.TinyIoCContainer.Current.Resolve<ICodeGenerationContext>();
-                            new Conductor(_VSOutputWindow, ctx).ProcessOneQuery(renamedQuery.Document);
+                            var conductor = TinyIoCContainer.Current.Resolve<IConductor>(
+                                new NamedParameterOverloads() {{"vsOutpuWindow", _VSOutputWindow}, {"ctx", ctx}});
+                            conductor.ProcessOneQuery(renamedQuery.Document);
                             return; //2 files to rename, then we're finished.
                         }
                     }
@@ -140,7 +165,8 @@ https://marketplace.visualstudio.com/items?itemName=bbsimonbb.QueryFirst#review-
                     if (text.Contains("managed by QueryFirst"))
                     {
                         var ctx = TinyIoCContainer.Current.Resolve<ICodeGenerationContext>();
-                        var cdctr = new Conductor(_VSOutputWindow, ctx);
+                        var cdctr = TinyIoCContainer.Current.Resolve<IConductor>(
+                            new NamedParameterOverloads() {{"vsOutpuWindow", _VSOutputWindow}, {"ctx", ctx}});
                         cdctr.ProcessOneQuery(Document);
                     }
 

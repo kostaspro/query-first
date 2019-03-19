@@ -2,6 +2,6 @@
 {
     public interface IConfigResolver
     {
-        QFConfigModel GetConfig(string filePath, string queryText);
+        IQFConfigModel GetConfig(string filePath, string queryText);
     }
 }

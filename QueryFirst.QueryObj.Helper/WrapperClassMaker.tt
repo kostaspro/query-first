@@ -1,0 +1,39 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+
+namespace <#= CodeGenerationContext.Namespace #>
+{
+	public partial class <#= CodeGenerationContext.BaseName #> : <#= QueryFirstInterfaceType #>{
+		public string CommandText {
+			get {
+				return @"<#= CodeGenerationContext.Query.FinalTextForCode #>";
+			}
+		}
+
+	<# if(CodeGenerationContext.ResultFields != null && CodeGenerationContext.ResultFields.Count > 0) { #>
+		public partial class Result {
+			<# foreach (var field in CodeGenerationContext.ResultFields) { #>
+			public <#= field.TypeCsShort #> <#= field.CSColumnName #> { get; set; }
+			<# } #>
+		}
+	<# } #>
+		public partial class Param {
+			<# foreach (var field in CodeGenerationContext.Query.QueryParams) { #>
+			public <#= field.CSType #> <#= field.CSName #> { get; set; }
+			<# } #>
+		}
+	}
+}
+<#+
+public ICodeGenerationContext CodeGenerationContext { get; set; }	
+public string QueryFirstInterfaceType { get; set; }
+#>

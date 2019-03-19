@@ -82,7 +82,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
     <None Include="Query.gen.cs" />
-    <None Include="QueryResults.cs" />
+    <None Include="Query.partial.cs" />
   </ItemGroup>
   <ItemGroup>
     <VSTemplate Include="QueryFirstQueryTemplate.vstemplate">

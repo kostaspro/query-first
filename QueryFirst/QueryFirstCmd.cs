@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 //sby
 using EnvDTE;
 using EnvDTE80;
+using TinyIoC;
 
 namespace QueryFirst
 {
@@ -115,7 +116,9 @@ namespace QueryFirst
                             if (text.Contains("managed by QueryFirst"))
                             {
                                 var ctx = TinyIoC.TinyIoCContainer.Current.Resolve<ICodeGenerationContext>();
-                                new Conductor(vsOutputWindow, ctx).ProcessOneQuery(item.Document);
+                                TinyIoCContainer.Current.Resolve<IConductor>(
+                                    new NamedParameterOverloads() {{"vsOutpuWindow", vsOutputWindow}, {"ctx", ctx}}).ProcessOneQuery(item.Document);
+                           //     new Conductor(vsOutputWindow, ctx).ProcessOneQuery(item.Document);
                             }
                             
                         }

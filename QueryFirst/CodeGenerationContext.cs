@@ -21,7 +21,7 @@ namespace QueryFirst
         public IProvider Provider { get { return provider; } }
         protected Query query;
         private IConfigResolver _configResolver;
-        private QFConfigModel _config;
+        private IQFConfigModel _config;
         protected ISchemaFetcher _schemaFetcher;
 
 
@@ -50,7 +50,7 @@ namespace QueryFirst
 
             string currDir = Path.GetDirectoryName(queryDoc.FullName);
         }
-        public QFConfigModel Config { get { return _config; } }
+        public IQFConfigModel Config { get { return _config; } }
         public Query Query { get { return query; } }
         protected string baseName;
         /// <summary>
@@ -126,7 +126,7 @@ namespace QueryFirst
             get
             {
                 if (string.IsNullOrEmpty(userPartialClass))
-                    userPartialClass = File.ReadAllText(CurrDir + BaseName + "Results.cs");
+                    userPartialClass = File.ReadAllText(CurrDir + BaseName + ".partial.cs");
                 return Regex.Match(userPartialClass, "(?im)^namespace (\\S+)").Groups[1].Value;
 
             }

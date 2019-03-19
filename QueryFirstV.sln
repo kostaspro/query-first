@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryFirstQueryTemplate", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryFirstTests", "QueryFirstTests\QueryFirstTests.csproj", "{F99B0827-B712-4D27-B908-2AD49BDDC8BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryFirst.QueryObj.Helper", "QueryFirst.QueryObj.Helper\QueryFirst.QueryObj.Helper.csproj", "{D3228499-F449-47E9-A166-FBF832D050B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryFirst.QueryObj.Helper.Tests", "QueryFirst.QueryObj.Helper.Tests\QueryFirst.QueryObj.Helper.Tests.csproj", "{62B7EB96-9FEB-4E26-A60D-B6778100BB42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{F99B0827-B712-4D27-B908-2AD49BDDC8BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F99B0827-B712-4D27-B908-2AD49BDDC8BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F99B0827-B712-4D27-B908-2AD49BDDC8BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3228499-F449-47E9-A166-FBF832D050B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3228499-F449-47E9-A166-FBF832D050B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3228499-F449-47E9-A166-FBF832D050B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3228499-F449-47E9-A166-FBF832D050B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62B7EB96-9FEB-4E26-A60D-B6778100BB42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62B7EB96-9FEB-4E26-A60D-B6778100BB42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62B7EB96-9FEB-4E26-A60D-B6778100BB42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62B7EB96-9FEB-4E26-A60D-B6778100BB42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

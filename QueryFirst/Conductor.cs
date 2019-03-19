@@ -10,7 +10,7 @@ using TinyIoC;
 
 namespace QueryFirst
 {
-    class Conductor
+    public class Conductor : IConductor
     {
         private TinyIoCContainer _tiny;
         private VSOutputWindow _vsOutputWindow;
@@ -21,9 +21,6 @@ namespace QueryFirst
             _vsOutputWindow = vsOutpuWindow;
             _ctx = ctx;
         }
-
-
-
 
         public void ProcessOneQuery(Document queryDoc)
         {
@@ -153,30 +150,30 @@ The query {1} may not run and the wrapper has not been regenerated.",
                         Code.Append(results.Usings());
                     Code.Append(wrapper.MakeInterface(_ctx));
                     Code.Append(wrapper.StartClass(_ctx));
-                    Code.Append(wrapper.MakeExecuteNonQueryWithoutConn(_ctx));
-                    Code.Append(wrapper.MakeExecuteNonQueryWithConn(_ctx));
+                    // Code.Append(wrapper.MakeExecuteNonQueryWithoutConn(_ctx));
+                    //  Code.Append(wrapper.MakeExecuteNonQueryWithConn(_ctx));
                     Code.Append(wrapper.MakeGetCommandTextMethod(_ctx));
-                    Code.Append(_ctx.Provider.MakeAddAParameter(_ctx));
+                    //  Code.Append(_ctx.Provider.MakeAddAParameter(_ctx));
 
                     if (_ctx.Config.MakeSelfTest)
                         Code.Append(wrapper.MakeSelfTestMethod(_ctx));
                     if (_ctx.ResultFields != null && _ctx.ResultFields.Count > 0)
                     {
-                        Code.Append(wrapper.MakeExecuteWithoutConn(_ctx));
-                        Code.Append(wrapper.MakeExecuteWithConn(_ctx));
-                        Code.Append(wrapper.MakeGetOneWithoutConn(_ctx));
-                        Code.Append(wrapper.MakeGetOneWithConn(_ctx));
-                        Code.Append(wrapper.MakeExecuteScalarWithoutConn(_ctx));
-                        Code.Append(wrapper.MakeExecuteScalarWithConn(_ctx));
+                        //Code.Append(wrapper.MakeExecuteWithoutConn(_ctx));
+                        //Code.Append(wrapper.MakeExecuteWithConn(_ctx));
+                        //Code.Append(wrapper.MakeGetOneWithoutConn(_ctx));
+                        //Code.Append(wrapper.MakeGetOneWithConn(_ctx));
+                        //Code.Append(wrapper.MakeExecuteScalarWithoutConn(_ctx));
+                        //Code.Append(wrapper.MakeExecuteScalarWithConn(_ctx));
 
-                        Code.Append(wrapper.MakeCreateMethod(_ctx));
-                        Code.Append(wrapper.MakeOtherMethods(_ctx));
-                        Code.Append(wrapper.CloseClass(_ctx));
-                        Code.Append(results.StartClass(_ctx));
-                        foreach (var fld in _ctx.ResultFields)
-                        {
-                            Code.Append(results.MakeProperty(fld));
-                        }
+                        //Code.Append(wrapper.MakeCreateMethod(_ctx));
+                        //Code.Append(wrapper.MakeOtherMethods(_ctx));
+                        //Code.Append(wrapper.CloseClass(_ctx));
+                        //Code.Append(results.StartClass(_ctx));
+                        //foreach (var fld in _ctx.ResultFields)
+                        //{
+                        //    Code.Append(results.MakeProperty(fld));
+                        //}
                     }
                     Code.Append(results.CloseClass()); // closes wrapper class if no results !
                     Code.Append(wrapper.CloseNamespace(_ctx));

@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
+using TinyIoC;
 
 namespace QueryFirst
 {
@@ -45,13 +46,14 @@ namespace QueryFirst
         /// <param name="filePath"></param>
         /// <param name="queryText"></param>
         /// <returns></returns>
-        public QFConfigModel GetConfig(string filePath, string queryText)
+        
+        public IQFConfigModel GetConfig(string filePath, string queryText)
         {
-            QFConfigModel config = new QFConfigModel();
+            IQFConfigModel config = TinyIoCContainer.Current.Resolve<IQFConfigModel>();
             var configFileContents = _configFileReader.GetConfigFile(filePath);
             if (!string.IsNullOrEmpty(configFileContents))
             {
-                config = JsonConvert.DeserializeObject<QFConfigModel>(configFileContents);
+                config = (IQFConfigModel)JsonConvert.DeserializeObject(configFileContents,config.GetType());
                 if (string.IsNullOrEmpty(config.Provider))
                 {
                     config.Provider = "System.Data.SqlClient";
@@ -77,7 +79,14 @@ namespace QueryFirst
         }
     }
 
-    public class QFConfigModel
+    public interface IQFConfigModel
+    {
+        string DefaultConnection { get; set; }
+        string Provider { get; set; }
+        string HelperAssembly { get; set; }
+        bool MakeSelfTest { get; set; }
+    }
+    public class QFConfigModel : IQFConfigModel
     {
         public string DefaultConnection { get; set; }
         public string Provider { get; set; }

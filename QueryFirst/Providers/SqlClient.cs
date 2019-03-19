@@ -233,6 +233,9 @@ namespace QueryFirst.Providers
                 case "structured":
                     DBTypeNormalized = "Structured";
                     return "DataTable";
+                case "table":
+                    DBTypeNormalized = "Table";
+                    return "DataTable";
                 case "uniqueidentifier":
                     DBTypeNormalized = "UniqueIdentifier";
                     return nullable ? "Guid?" : "Guid";
