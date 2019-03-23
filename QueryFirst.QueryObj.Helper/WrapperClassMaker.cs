@@ -28,102 +28,102 @@ namespace QueryFirst.QueryObj.Helper
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using System.Data;\r\nusing System.Data.SqlClient;\r\nusing System.IO;\r\nusing System." +
-                    "Collections.Generic;\r\nusing System.Configuration;\r\nusing System.Linq;\r\n\r\nnamespa" +
-                    "ce ");
+            this.Write("using System;\r\nusing System.Data;\r\nusing System.Data.SqlClient;\r\nusing System.IO;" +
+                    "\r\nusing System.Collections.Generic;\r\nusing System.Configuration;\r\nusing System.L" +
+                    "inq;\r\n\r\nnamespace ");
             
-            #line 13 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
+            #line 14 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(CodeGenerationContext.Namespace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\tpublic partial class ");
             
-            #line 15 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
+            #line 16 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(CodeGenerationContext.BaseName));
             
             #line default
             #line hidden
             this.Write(" : ");
             
-            #line 15 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
+            #line 16 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(QueryFirstInterfaceType));
             
             #line default
             #line hidden
             this.Write("{\r\n\t\tpublic string CommandText {\r\n\t\t\tget {\r\n\t\t\t\treturn @\"");
             
-            #line 18 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
+            #line 19 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(CodeGenerationContext.Query.FinalTextForCode));
             
             #line default
             #line hidden
             this.Write("\";\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t");
             
-            #line 22 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
+            #line 23 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
  if(CodeGenerationContext.ResultFields != null && CodeGenerationContext.ResultFields.Count > 0) { 
             
             #line default
             #line hidden
             this.Write("\t\tpublic partial class Result {\r\n\t\t\t");
             
-            #line 24 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
+            #line 25 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
  foreach (var field in CodeGenerationContext.ResultFields) { 
             
             #line default
             #line hidden
             this.Write("\t\t\tpublic ");
             
-            #line 25 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
+            #line 26 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.TypeCsShort));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 25 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
+            #line 26 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.CSColumnName));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n\t\t\t");
             
-            #line 26 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
+            #line 27 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t}\r\n\t");
             
-            #line 28 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
+            #line 29 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\tpublic partial class Param {\r\n\t\t\t");
             
-            #line 30 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
+            #line 31 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
  foreach (var field in CodeGenerationContext.Query.QueryParams) { 
             
             #line default
             #line hidden
             this.Write("\t\t\tpublic ");
             
-            #line 31 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
+            #line 32 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.CSType));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 31 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
+            #line 32 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.CSName));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n\t\t\t");
             
-            #line 32 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
+            #line 33 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
  } 
             
             #line default
@@ -132,7 +132,7 @@ namespace QueryFirst.QueryObj.Helper
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 36 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
+        #line 37 "C:\src\query-first-my\QueryFirst.QueryObj.Helper\WrapperClassMaker.tt"
 
 public ICodeGenerationContext CodeGenerationContext { get; set; }	
 public string QueryFirstInterfaceType { get; set; }
